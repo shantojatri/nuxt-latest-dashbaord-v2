@@ -1,10 +1,10 @@
 <!-- app/components/dashboard/RecentProfilesTable.vue -->
 <script setup lang="ts">
-import { Users } from 'lucide-vue-next'
-import { Avatar, AvatarFallback } from '@/components/ui/avatar'
-import { Button } from '@/components/ui/button'
-import { Checkbox } from '@/components/ui/checkbox'
-import { Progress } from '@/components/ui/progress'
+import { Users } from "lucide-vue-next";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Progress } from "@/components/ui/progress";
 import {
   Table,
   TableBody,
@@ -12,48 +12,89 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from '@/components/ui/table'
+} from "@/components/ui/table";
+import { NuxtLink } from "#components";
 
 interface Profile {
-  id: number
-  name: string
-  age: number
-  city: string
-  status: 'Active' | 'Pending' | 'Rejected'
-  match: number
+  id: number;
+  name: string;
+  age: number;
+  city: string;
+  status: "Active" | "Pending" | "Rejected";
+  match: number;
 }
 
 const profiles: Profile[] = [
-  { id: 1, name: 'Fatema Begum', age: 24, city: 'Dhaka', status: 'Active', match: 87 },
-  { id: 2, name: 'Nasrin Akter', age: 27, city: 'Chittagong', status: 'Pending', match: 72 },
-  { id: 3, name: 'Sumaiya Islam', age: 22, city: 'Sylhet', status: 'Active', match: 91 },
-  { id: 4, name: 'Ruksana Khanam', age: 29, city: 'Rajshahi', status: 'Rejected', match: 45 },
-  { id: 5, name: 'Maliha Chowdhury', age: 25, city: 'Dhaka', status: 'Active', match: 83 },
-]
+  {
+    id: 1,
+    name: "Fatema Begum",
+    age: 24,
+    city: "Dhaka",
+    status: "Active",
+    match: 87,
+  },
+  {
+    id: 2,
+    name: "Nasrin Akter",
+    age: 27,
+    city: "Chittagong",
+    status: "Pending",
+    match: 72,
+  },
+  {
+    id: 3,
+    name: "Sumaiya Islam",
+    age: 22,
+    city: "Sylhet",
+    status: "Active",
+    match: 91,
+  },
+  {
+    id: 4,
+    name: "Ruksana Khanam",
+    age: 29,
+    city: "Rajshahi",
+    status: "Rejected",
+    match: 45,
+  },
+  {
+    id: 5,
+    name: "Maliha Chowdhury",
+    age: 25,
+    city: "Dhaka",
+    status: "Active",
+    match: 83,
+  },
+];
 
 const getInitials = (name: string) => {
   return name
-    .split(' ')
+    .split(" ")
     .map((n) => n[0])
-    .join('')
+    .join("")
     .substring(0, 2)
-    .toUpperCase()
-}
+    .toUpperCase();
+};
 
 const statusClasses: Record<string, string> = {
-  Active: 'bg-green-50 text-green-700 dark:bg-green-950/50 dark:text-green-400',
-  Pending: 'bg-amber-50 text-amber-700 dark:bg-amber-950/50 dark:text-amber-400',
-  Rejected: 'bg-red-50 text-red-600 dark:bg-red-950/50 dark:text-red-400',
-}
+  Active: "bg-green-50 text-green-700 dark:bg-green-950/50 dark:text-green-400",
+  Pending:
+    "bg-amber-50 text-amber-700 dark:bg-amber-950/50 dark:text-amber-400",
+  Rejected: "bg-red-50 text-red-600 dark:bg-red-950/50 dark:text-red-400",
+};
 </script>
 
 <template>
-  <div class="rounded-xl border border-slate-100 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 shadow-sm">
+  <div
+    class="rounded-xl border border-slate-100 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 shadow-sm"
+  >
     <!-- Header -->
     <div class="flex justify-between items-center">
       <div class="flex items-center gap-2">
         <Users class="size-5 text-slate-500 dark:text-slate-400" />
-        <span class="text-base font-semibold text-slate-900 dark:text-white">Recent Profiles</span>
+        <span class="text-base font-semibold text-slate-900 dark:text-white"
+          >Recent Profiles</span
+        >
       </div>
       <NuxtLink
         to="/search"
@@ -70,16 +111,24 @@ const statusClasses: Record<string, string> = {
           <TableHead class="w-10">
             <Checkbox />
           </TableHead>
-          <TableHead class="text-xs font-semibold uppercase tracking-wider text-slate-400 dark:text-slate-500">
+          <TableHead
+            class="text-xs font-semibold uppercase tracking-wider text-slate-400 dark:text-slate-500"
+          >
             Name
           </TableHead>
-          <TableHead class="text-xs font-semibold uppercase tracking-wider text-slate-400 dark:text-slate-500">
+          <TableHead
+            class="text-xs font-semibold uppercase tracking-wider text-slate-400 dark:text-slate-500"
+          >
             Status
           </TableHead>
-          <TableHead class="text-xs font-semibold uppercase tracking-wider text-slate-400 dark:text-slate-500">
+          <TableHead
+            class="text-xs font-semibold uppercase tracking-wider text-slate-400 dark:text-slate-500"
+          >
             Match %
           </TableHead>
-          <TableHead class="text-xs font-semibold uppercase tracking-wider text-slate-400 dark:text-slate-500">
+          <TableHead
+            class="text-xs font-semibold uppercase tracking-wider text-slate-400 dark:text-slate-500"
+          >
             Action
           </TableHead>
         </TableRow>
@@ -96,7 +145,9 @@ const statusClasses: Record<string, string> = {
           <TableCell>
             <div class="flex items-center gap-3">
               <Avatar class="size-8">
-                <AvatarFallback class="bg-secondary-100 dark:bg-secondary-900 text-secondary-700 dark:text-secondary-300 text-xs font-medium">
+                <AvatarFallback
+                  class="bg-secondary-100 dark:bg-secondary-900 text-secondary-700 dark:text-secondary-300 text-xs font-medium"
+                >
                   {{ getInitials(profile.name) }}
                 </AvatarFallback>
               </Avatar>
@@ -120,11 +171,17 @@ const statusClasses: Record<string, string> = {
           </TableCell>
           <TableCell>
             <div class="flex items-center gap-2">
-              <Progress
-                :model-value="profile.match"
-                class="h-1.5 w-20"
-              />
-              <span class="text-xs text-slate-500 dark:text-slate-400">{{ profile.match }}%</span>
+              <div
+                class="[--progress-indicator-color:theme(colors.secondary.DEFAULT)] [&_[data-slot=progress-indicator]]:bg-[--progress-indicator-color]"
+              >
+                <Progress
+                  :model-value="profile.match"
+                  class="h-1.5 w-20 bg-secondary-100 dark:bg-secondary-950/50"
+                />
+              </div>
+              <span class="text-xs text-slate-500 dark:text-slate-400"
+                >{{ profile.match }}%</span
+              >
             </div>
           </TableCell>
           <TableCell>
