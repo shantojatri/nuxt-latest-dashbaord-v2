@@ -15,6 +15,7 @@ import MatchOverviewChart from "~/components/dashboard/MatchOverviewChart.vue";
 import NewMembersChart from "~/components/dashboard/NewMembersChart.vue";
 import MatchDistribution from "~/components/dashboard/MatchDistribution.vue";
 import RecentProfilesTable from "~/components/dashboard/RecentProfilesTable.vue";
+import RecentActivity from "~/components/dashboard/RecentActivity.vue";
 
 definePageMeta({ layout: "dashboard" });
 
@@ -119,6 +120,11 @@ const stats = [
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 mt-4">
       <MatchDistribution />
       <RecentProfilesTable />
+    </div>
+
+    <!-- Final Row -->
+    <div class="mt-4">
+      <RecentActivity />
     </div>
   </div>
 </template>

@@ -54,7 +54,7 @@ const navSections: NavSection[] = [
   {
     label: "GENERAL",
     items: [
-      { label: "Dashboard", icon: LayoutDashboard, href: "/dashboard" },
+      { label: "Dashboard", icon: LayoutDashboard, href: "/" },
       { label: "Search", icon: Search, href: "/search" },
       { label: "Profile", icon: User, href: "/profile" },
       { label: "Messages", icon: MessageSquare, href: "/messages", badge: 8 },
