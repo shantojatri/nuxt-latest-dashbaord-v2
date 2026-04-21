@@ -5,10 +5,15 @@ export default defineNuxtConfig({
   compatibilityDate: "2025-07-15",
   devtools: { enabled: true },
 
-  modules: ["shadcn-nuxt"],
+  modules: ["shadcn-nuxt", "@nuxtjs/color-mode", "@vueuse/nuxt"],
   shadcn: {
     prefix: "",
-    componentDir: "./components/ui",
+    componentDir: "./app/components/ui",
+  },
+  colorMode: {
+    classSuffix: "",
+    preference: "system",
+    fallback: "light",
   },
   css: ["~/assets/css/tailwind.css"],
 
