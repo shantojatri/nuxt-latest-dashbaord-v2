@@ -1,6 +1,6 @@
 <!-- app/components/layout/AppNavbar.vue -->
 <script setup lang="ts">
-import { Search, PanelLeftClose, PanelLeftOpen } from "lucide-vue-next";
+import { Search, PanelLeftClose, PanelLeftOpen, Menu } from "lucide-vue-next";
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
 import AppLogo from "../shared/AppLogo.vue";
@@ -9,7 +9,7 @@ import ThemeToggle from "../shared/ThemeToggle.vue";
 import NotificationBell from "../shared/NotificationBell.vue";
 import UserMenu from "../shared/UserMenu.vue";
 
-const { isCollapsed, collapse } = useSidebar();
+const { isCollapsed, collapse, toggleMobile } = useSidebar();
 </script>
 
 <template>
@@ -18,9 +18,20 @@ const { isCollapsed, collapse } = useSidebar();
   >
     <!-- LEFT -->
     <div class="flex items-center gap-2">
+      <!-- Mobile Menu Toggle -->
+      <button
+        aria-label="Toggle mobile menu"
+        class="lg:hidden flex items-center justify-center size-9 rounded-lg text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer"
+        @click="toggleMobile()"
+      >
+        <Menu class="size-5" />
+      </button>
+
       <div class="lg:hidden">
         <AppLogo :collapsed="false" />
       </div>
+
+      <!-- Desktop Sidebar Toggle -->
       <button
         aria-label="Toggle sidebar"
         class="hidden lg:inline-flex items-center justify-center size-9 rounded-lg text-slate-400 dark:text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer"
@@ -42,12 +53,14 @@ const { isCollapsed, collapse } = useSidebar();
       />
     </div>
 
-    <!-- RIGHT -->
+    <!-- RIGHT (Hidden on small mobile, items moved to sidebar) -->
     <div class="flex items-center gap-1">
-      <LanguageSwitcher />
-      <ThemeToggle />
-      <NotificationBell />
-      <Separator orientation="vertical" class="h-6 mx-1" />
+      <div class="hidden sm:flex items-center gap-1">
+        <LanguageSwitcher />
+        <ThemeToggle />
+        <NotificationBell />
+        <Separator orientation="vertical" class="h-6 mx-1" />
+      </div>
       <UserMenu />
     </div>
   </header>

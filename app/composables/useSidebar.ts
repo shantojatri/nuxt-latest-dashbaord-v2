@@ -1,5 +1,8 @@
 // app/composables/useSidebar.ts
+import { ref, computed } from 'vue'
+
 const isCollapsed = ref(false)
+const isMobileOpen = ref(false)
 
 export const useSidebar = () => {
   const route = useRoute()
@@ -14,10 +17,21 @@ export const useSidebar = () => {
     isCollapsed.value = !isCollapsed.value
   }
 
+  const toggleMobile = () => {
+    isMobileOpen.value = !isMobileOpen.value
+  }
+
+  const closeMobile = () => {
+    isMobileOpen.value = false
+  }
+
   return {
     isCollapsed,
+    isMobileOpen,
     activeRoute,
     toggle,
     collapse,
+    toggleMobile,
+    closeMobile,
   }
 }
