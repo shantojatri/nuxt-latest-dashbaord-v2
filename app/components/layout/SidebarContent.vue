@@ -1,6 +1,7 @@
 <!-- app/components/layout/SidebarContent.vue -->
 <script setup lang="ts">
 import { ref } from "vue";
+import AppLogo from "../shared/AppLogo.vue";
 import {
   LayoutDashboard,
   Search,
@@ -23,13 +24,12 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@/components/ui/collapsible";
-import AppLogo from "../shared/AppLogo.vue";
 
 const props = defineProps<{
   isCollapsed: boolean;
 }>();
 
-const emit = defineEmits(['click']);
+const emit = defineEmits(["click"]);
 
 const { activeRoute } = useSidebar();
 const activitiesOpen = ref(false);
@@ -58,35 +58,54 @@ const navSections: NavSection[] = [
   {
     label: "GENERAL",
     items: [
-      { label: "Dashboard", icon: LayoutDashboard, href: "/" },
-      { label: "Search", icon: Search, href: "/search" },
-      { label: "Profile", icon: User, href: "/profile" },
-      { label: "Messages", icon: MessageSquare, href: "/messages", badge: 8 },
+      {
+        label: "Dashboard",
+        icon: LayoutDashboard,
+        href: "/matchmaking/dashboard",
+      },
+      { label: "Search", icon: Search, href: "/matchmaking/search" },
+      { label: "Profile", icon: User, href: "/matchmaking/profile" },
+      {
+        label: "Messages",
+        icon: MessageSquare,
+        href: "/matchmaking/messages",
+        badge: 8,
+      },
     ],
   },
   {
     label: "TOOLS",
     items: [
-      { label: "Pricing", icon: CreditCard, href: "/pricing" },
+      { label: "Pricing", icon: CreditCard, href: "/matchmaking/pricing" },
       {
         label: "Activities",
         icon: Activity,
         collapsible: true,
         children: [
-          { label: "Rejected", icon: XCircle, href: "/activities/rejected" },
+          {
+            label: "Rejected",
+            icon: XCircle,
+            href: "/matchmaking/activities/rejected",
+          },
           {
             label: "Short Listed",
             icon: Star,
-            href: "/activities/shortlisted",
+            href: "/matchmaking/activities/shortlisted",
           },
-          { label: "Block List", icon: Ban, href: "/activities/blocked" },
+          {
+            label: "Block List",
+            icon: Ban,
+            href: "/matchmaking/activities/blocked",
+          },
         ],
       },
     ],
   },
   {
     label: "SUPPORT",
-    items: [{ label: "Settings", icon: Settings, href: "/settings" }],
+    items: [
+      { label: "Settings", icon: Settings, href: "/matchmaking/settings" },
+    ],
   },
 ];
 
@@ -223,16 +242,30 @@ const isChildActive = (children?: NavChild[]) => {
       class="mt-auto pt-3 pb-4 px-2 border-t border-slate-100 dark:border-slate-800 shrink-0"
     >
       <!-- Upgrade Plan Card -->
-      <div v-if="!props.isCollapsed" class="mb-4 p-4 rounded-xl bg-gradient-to-br from-slate-50 to-slate-100/50 dark:from-slate-800/50 dark:to-slate-900 border border-slate-100 dark:border-slate-800 shadow-sm relative overflow-hidden group">
-        <div class="absolute -right-4 -top-4 size-16 bg-primary/10 rounded-full blur-2xl group-hover:bg-primary/20 transition-colors"></div>
+      <div
+        v-if="!props.isCollapsed"
+        class="mb-4 p-4 rounded-xl bg-gradient-to-br from-slate-50 to-slate-100/50 dark:from-slate-800/50 dark:to-slate-900 border border-slate-100 dark:border-slate-800 shadow-sm relative overflow-hidden group"
+      >
+        <div
+          class="absolute -right-4 -top-4 size-16 bg-primary/10 rounded-full blur-2xl group-hover:bg-primary/20 transition-colors"
+        ></div>
         <div class="relative z-10 space-y-3">
           <div class="flex items-center gap-2">
-            <div class="size-8 rounded-lg bg-white dark:bg-slate-800 flex items-center justify-center shadow-sm border border-slate-100 dark:border-slate-700">
+            <div
+              class="size-8 rounded-lg bg-white dark:bg-slate-800 flex items-center justify-center shadow-sm border border-slate-100 dark:border-slate-700"
+            >
               <Sparkles class="size-4 text-primary" />
             </div>
-            <span class="text-xs font-bold text-slate-900 dark:text-white tracking-tight">Upgrade Plan</span>
+            <span
+              class="text-xs font-bold text-slate-900 dark:text-white tracking-tight"
+              >Upgrade Plan</span
+            >
           </div>
-          <p class="text-[10px] text-slate-500 dark:text-slate-400 leading-normal">Get unlimited matches and priority support.</p>
+          <p
+            class="text-[10px] text-slate-500 dark:text-slate-400 leading-normal"
+          >
+            Get unlimited matches and priority support.
+          </p>
           <Button
             variant="default"
             size="sm"
@@ -242,10 +275,12 @@ const isChildActive = (children?: NavChild[]) => {
           </Button>
         </div>
       </div>
-      
+
       <!-- Collapsed Upgrade Icon -->
       <div v-else class="mb-4 flex justify-center">
-        <button class="size-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-all shadow-sm">
+        <button
+          class="size-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-all shadow-sm"
+        >
           <Sparkles class="size-5" />
         </button>
       </div>

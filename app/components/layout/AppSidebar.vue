@@ -1,8 +1,8 @@
 <!-- app/components/layout/AppSidebar.vue -->
 <script setup lang="ts">
-import { X } from "lucide-vue-next";
-import { Sheet, SheetContent } from "@/components/ui/sheet";
 import AppLogo from "../shared/AppLogo.vue";
+import { Sheet, SheetContent } from "@/components/ui/sheet";
+import { X } from "lucide-vue-next";
 import LanguageSwitcher from "../shared/LanguageSwitcher.vue";
 import ThemeToggle from "../shared/ThemeToggle.vue";
 import NotificationBell from "../shared/NotificationBell.vue";

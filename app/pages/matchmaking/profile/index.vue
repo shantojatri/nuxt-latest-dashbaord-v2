@@ -23,6 +23,7 @@ import {
   ShieldCheck,
   Star,
   X,
+  Save,
 } from "lucide-vue-next";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
@@ -35,6 +36,81 @@ definePageMeta({ layout: "dashboard" });
 
 const isEditing = ref(false);
 const completion = ref(85);
+
+// Modal state
+const activeModal = ref<string | null>(null);
+
+function openModal(section: string) {
+  activeModal.value = section;
+}
+function closeModal() {
+  activeModal.value = null;
+}
+
+const modalConfig: Record<string, { title: string; icon: any; color: string; fields: { label: string; value: string; type?: string }[] }> = {
+  about: {
+    title: "Edit Personal Overview",
+    icon: User,
+    color: "primary",
+    fields: [
+      { label: "Bio", value: "I am a passionate UI/UX Designer…", type: "textarea" },
+      { label: "Age", value: "26" },
+      { label: "Profession", value: "UI/UX Designer" },
+      { label: "Education", value: "BSc in Computer Science" },
+      { label: "Height", value: "5' 4\" (162 cm)" },
+    ],
+  },
+  passions: {
+    title: "Edit Passions",
+    icon: Heart,
+    color: "secondary",
+    fields: [
+      { label: "Passion 1", value: "Designing" },
+      { label: "Passion 2", value: "Photography" },
+      { label: "Passion 3", value: "Traveling" },
+      { label: "Passion 4", value: "Music" },
+      { label: "Passion 5", value: "Reading" },
+    ],
+  },
+  family: {
+    title: "Edit Family Background",
+    icon: Users,
+    color: "primary",
+    fields: [
+      { label: "Father's Occupation", value: "Retired Govt. Officer" },
+      { label: "Mother's Occupation", value: "Housewife" },
+      { label: "Siblings", value: "1 Brother, 2 Sisters" },
+      { label: "Family Type", value: "Nuclear Family" },
+      { label: "Family Values", value: "Moderate / Religious" },
+      { label: "Native Place", value: "Comilla, Bangladesh" },
+    ],
+  },
+  lifestyle: {
+    title: "Edit Lifestyle & Habits",
+    icon: Coffee,
+    color: "accent",
+    fields: [
+      { label: "Dietary Habits", value: "Non-Vegetarian" },
+      { label: "Smoking", value: "Never" },
+      { label: "Drinking", value: "Never" },
+      { label: "Languages", value: "Bangla, English" },
+      { label: "Hobbies", value: "Cooking, Blogging, Gardening" },
+    ],
+  },
+  preferences: {
+    title: "Edit Partner Preferences",
+    icon: Star,
+    color: "secondary",
+    fields: [
+      { label: "Partner Age", value: "27 - 32 Years" },
+      { label: "Partner Height", value: "5' 6\" - 6' 0\"" },
+      { label: "Education", value: "Masters / Engineer" },
+      { label: "Profession", value: "Engineer / Doctor / Business" },
+      { label: "Location", value: "Dhaka or Chittagong" },
+      { label: "Marital Status", value: "Never Married" },
+    ],
+  },
+};
 
 const profileInfo = {
   name: "Rina Khatun",
@@ -267,13 +343,22 @@ const preferenceInfo = [
             <CardHeader
               class="border-b border-slate-50 dark:border-slate-800/50 bg-slate-50/30 dark:bg-slate-800/20"
             >
-              <CardTitle class="text-base font-bold flex items-center gap-2">
-                <div
-                  class="size-8 rounded-lg bg-primary/10 flex items-center justify-center"
-                >
-                  <User class="size-4 text-primary" />
+              <CardTitle class="text-base font-bold flex items-center gap-2 justify-between">
+                <div class="flex items-center gap-2">
+                  <div
+                    class="size-8 rounded-lg bg-primary/10 flex items-center justify-center"
+                  >
+                    <User class="size-4 text-primary" />
+                  </div>
+                  Personal Overview
                 </div>
-                Personal Overview
+                <button
+                  @click="openModal('about')"
+                  class="size-8 rounded-lg flex items-center justify-center text-slate-400 hover:text-primary hover:bg-primary/10 dark:hover:bg-primary/20 transition-all duration-200 group"
+                  title="Edit Personal Overview"
+                >
+                  <Pencil class="size-4 transition-transform duration-200 group-hover:scale-110" />
+                </button>
               </CardTitle>
             </CardHeader>
             <CardContent class="p-6 space-y-6">
@@ -339,13 +424,22 @@ const preferenceInfo = [
             <CardHeader
               class="border-b border-slate-50 dark:border-slate-800/50 bg-slate-50/30 dark:bg-slate-800/20"
             >
-              <CardTitle class="text-base font-bold flex items-center gap-2">
-                <div
-                  class="size-8 rounded-lg bg-secondary/10 flex items-center justify-center"
-                >
-                  <Heart class="size-4 text-secondary" />
+              <CardTitle class="text-base font-bold flex items-center gap-2 justify-between">
+                <div class="flex items-center gap-2">
+                  <div
+                    class="size-8 rounded-lg bg-secondary/10 flex items-center justify-center"
+                  >
+                    <Heart class="size-4 text-secondary" />
+                  </div>
+                  Passions
                 </div>
-                Passions
+                <button
+                  @click="openModal('passions')"
+                  class="size-8 rounded-lg flex items-center justify-center text-slate-400 hover:text-secondary hover:bg-secondary/10 dark:hover:bg-secondary/20 transition-all duration-200 group"
+                  title="Edit Passions"
+                >
+                  <Pencil class="size-4 transition-transform duration-200 group-hover:scale-110" />
+                </button>
               </CardTitle>
             </CardHeader>
             <CardContent class="p-6">
@@ -397,13 +491,22 @@ const preferenceInfo = [
           <CardHeader
             class="border-b border-slate-50 dark:border-slate-800/50 bg-slate-50/30 dark:bg-slate-800/20"
           >
-            <CardTitle class="text-base font-bold flex items-center gap-2">
-              <div
-                class="size-8 rounded-lg bg-primary/10 flex items-center justify-center"
-              >
-                <Users class="size-4 text-primary" />
+            <CardTitle class="text-base font-bold flex items-center gap-2 justify-between">
+              <div class="flex items-center gap-2">
+                <div
+                  class="size-8 rounded-lg bg-primary/10 flex items-center justify-center"
+                >
+                  <Users class="size-4 text-primary" />
+                </div>
+                Family Background
               </div>
-              Family Background
+              <button
+                @click="openModal('family')"
+                class="size-8 rounded-lg flex items-center justify-center text-slate-400 hover:text-primary hover:bg-primary/10 dark:hover:bg-primary/20 transition-all duration-200 group"
+                title="Edit Family Background"
+              >
+                <Pencil class="size-4 transition-transform duration-200 group-hover:scale-110" />
+              </button>
             </CardTitle>
           </CardHeader>
           <CardContent class="p-6">
@@ -447,13 +550,22 @@ const preferenceInfo = [
           <CardHeader
             class="border-b border-slate-50 dark:border-slate-800/50 bg-slate-50/30 dark:bg-slate-800/20"
           >
-            <CardTitle class="text-base font-bold flex items-center gap-2">
-              <div
-                class="size-8 rounded-lg bg-accent/10 flex items-center justify-center"
-              >
-                <Coffee class="size-4 text-accent" />
+            <CardTitle class="text-base font-bold flex items-center gap-2 justify-between">
+              <div class="flex items-center gap-2">
+                <div
+                  class="size-8 rounded-lg bg-accent/10 flex items-center justify-center"
+                >
+                  <Coffee class="size-4 text-accent" />
+                </div>
+                Lifestyle & Habits
               </div>
-              Lifestyle & Habits
+              <button
+                @click="openModal('lifestyle')"
+                class="size-8 rounded-lg flex items-center justify-center text-slate-400 hover:text-accent hover:bg-accent/10 dark:hover:bg-accent/20 transition-all duration-200 group"
+                title="Edit Lifestyle & Habits"
+              >
+                <Pencil class="size-4 transition-transform duration-200 group-hover:scale-110" />
+              </button>
             </CardTitle>
           </CardHeader>
           <CardContent class="p-6">
@@ -497,13 +609,22 @@ const preferenceInfo = [
           <CardHeader
             class="border-b border-slate-50 dark:border-slate-800/50 bg-slate-50/30 dark:bg-slate-800/20"
           >
-            <CardTitle class="text-base font-bold flex items-center gap-2">
-              <div
-                class="size-8 rounded-lg bg-secondary/10 flex items-center justify-center"
-              >
-                <Star class="size-4 text-secondary" />
+            <CardTitle class="text-base font-bold flex items-center gap-2 justify-between">
+              <div class="flex items-center gap-2">
+                <div
+                  class="size-8 rounded-lg bg-secondary/10 flex items-center justify-center"
+                >
+                  <Star class="size-4 text-secondary" />
+                </div>
+                Partner Preferences
               </div>
-              Partner Preferences
+              <button
+                @click="openModal('preferences')"
+                class="size-8 rounded-lg flex items-center justify-center text-slate-400 hover:text-secondary hover:bg-secondary/10 dark:hover:bg-secondary/20 transition-all duration-200 group"
+                title="Edit Partner Preferences"
+              >
+                <Pencil class="size-4 transition-transform duration-200 group-hover:scale-110" />
+              </button>
             </CardTitle>
           </CardHeader>
           <CardContent class="p-6">
@@ -536,6 +657,133 @@ const preferenceInfo = [
         </Card>
       </TabsContent>
     </Tabs>
+
+    <!-- Edit Modal -->
+    <Teleport to="body">
+      <Transition
+        enter-active-class="transition-all duration-300 ease-out"
+        enter-from-class="opacity-0"
+        enter-to-class="opacity-100"
+        leave-active-class="transition-all duration-200 ease-in"
+        leave-from-class="opacity-100"
+        leave-to-class="opacity-0"
+      >
+        <div
+          v-if="activeModal"
+          class="fixed inset-0 z-50 flex items-center justify-center p-4"
+        >
+          <!-- Backdrop -->
+          <div
+            class="absolute inset-0 bg-slate-900/60 backdrop-blur-sm"
+            @click="closeModal"
+          />
+
+          <!-- Modal Panel -->
+          <Transition
+            enter-active-class="transition-all duration-300 ease-out"
+            enter-from-class="opacity-0 scale-95 translate-y-4"
+            enter-to-class="opacity-100 scale-100 translate-y-0"
+            leave-active-class="transition-all duration-200 ease-in"
+            leave-from-class="opacity-100 scale-100 translate-y-0"
+            leave-to-class="opacity-0 scale-95 translate-y-4"
+          >
+            <div
+              v-if="activeModal && modalConfig[activeModal]"
+              class="relative z-10 w-full max-w-lg bg-white dark:bg-slate-900 rounded-2xl shadow-2xl border border-slate-100 dark:border-slate-800 overflow-hidden"
+            >
+              <!-- Modal Header -->
+              <div
+                class="flex items-center justify-between px-6 py-4 border-b border-slate-100 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/30"
+              >
+                <div class="flex items-center gap-3">
+                  <div
+                    class="size-9 rounded-xl flex items-center justify-center"
+                    :class="{
+                      'bg-primary/10': modalConfig[activeModal].color === 'primary',
+                      'bg-secondary/10': modalConfig[activeModal].color === 'secondary',
+                      'bg-accent/10': modalConfig[activeModal].color === 'accent',
+                    }"
+                  >
+                    <component
+                      :is="modalConfig[activeModal].icon"
+                      class="size-5"
+                      :class="{
+                        'text-primary': modalConfig[activeModal].color === 'primary',
+                        'text-secondary': modalConfig[activeModal].color === 'secondary',
+                        'text-accent': modalConfig[activeModal].color === 'accent',
+                      }"
+                    />
+                  </div>
+                  <div>
+                    <h2 class="text-base font-bold text-slate-900 dark:text-white">
+                      {{ modalConfig[activeModal].title }}
+                    </h2>
+                    <p class="text-xs text-slate-500 dark:text-slate-400">
+                      Update your information below
+                    </p>
+                  </div>
+                </div>
+                <button
+                  @click="closeModal"
+                  class="size-8 rounded-lg flex items-center justify-center text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all duration-200"
+                >
+                  <X class="size-4" />
+                </button>
+              </div>
+
+              <!-- Modal Body -->
+              <div class="px-6 py-5 max-h-[60vh] overflow-y-auto space-y-4 scrollbar-none">
+                <div
+                  v-for="(field, i) in modalConfig[activeModal].fields"
+                  :key="i"
+                  class="space-y-1.5"
+                >
+                  <label
+                    class="block text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest"
+                  >
+                    {{ field.label }}
+                  </label>
+                  <textarea
+                    v-if="field.type === 'textarea'"
+                    class="w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50/50 dark:bg-slate-800/50 px-4 py-2.5 text-sm font-medium text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all resize-none"
+                    rows="3"
+                    :value="field.value"
+                  />
+                  <input
+                    v-else
+                    type="text"
+                    class="w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50/50 dark:bg-slate-800/50 px-4 py-2.5 text-sm font-medium text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all"
+                    :value="field.value"
+                  />
+                </div>
+              </div>
+
+              <!-- Modal Footer -->
+              <div
+                class="flex items-center justify-end gap-3 px-6 py-4 border-t border-slate-100 dark:border-slate-800 bg-slate-50/30 dark:bg-slate-800/20"
+              >
+                <Button
+                  variant="outline"
+                  size="sm"
+                  class="rounded-xl border-slate-200 dark:border-slate-700 font-bold"
+                  @click="closeModal"
+                >
+                  Cancel
+                </Button>
+                <Button
+                  size="sm"
+                  class="rounded-xl font-bold bg-primary hover:bg-primary/90 text-white shadow-md shadow-primary/20"
+                  @click="closeModal"
+                >
+                  <Save class="size-4 mr-2" />
+                  Save Changes
+                </Button>
+              </div>
+            </div>
+          </Transition>
+        </div>
+      </Transition>
+    </Teleport>
   </div>
 </template>
 

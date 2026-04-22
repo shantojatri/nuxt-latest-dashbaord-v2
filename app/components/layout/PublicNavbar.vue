@@ -32,9 +32,9 @@ const navLinks = [
   <nav
     class="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
     :class="[
-      isScrolled 
-        ? 'bg-white/80 dark:bg-slate-900/80 backdrop-blur-md shadow-sm py-3' 
-        : 'bg-transparent py-5'
+      isScrolled
+        ? 'bg-white/80 dark:bg-slate-900/80 backdrop-blur-md shadow-sm py-3'
+        : 'bg-transparent py-5',
     ]"
   >
     <div class="container mx-auto px-4 flex items-center justify-between">
@@ -57,12 +57,16 @@ const navLinks = [
 
       <!-- Right Side -->
       <div class="flex items-center gap-3">
-        <NuxtLink to="/dashboard">
-          <Button variant="ghost" size="icon" class="rounded-full border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm hover:text-primary">
+        <NuxtLink to="/matchmaking/dashboard">
+          <Button
+            variant="ghost"
+            size="icon"
+            class="rounded-full border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm hover:text-primary"
+          >
             <User class="size-5" />
           </Button>
         </NuxtLink>
-        
+
         <!-- Mobile Toggle -->
         <button
           class="md:hidden p-2 text-slate-600 dark:text-slate-300"
@@ -97,7 +101,9 @@ const navLinks = [
           {{ link.label }}
         </NuxtLink>
         <div class="pt-4 border-t border-slate-100 dark:border-slate-800">
-          <Button class="w-full bg-primary hover:bg-primary/90 font-bold rounded-xl h-11 shadow-lg shadow-primary/20">
+          <Button
+            class="w-full bg-primary hover:bg-primary/90 font-bold rounded-xl h-11 shadow-lg shadow-primary/20"
+          >
             Get Started
           </Button>
         </div>
