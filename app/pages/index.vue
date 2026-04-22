@@ -148,26 +148,26 @@ const successStories = [
               ></div>
 
               <div
-                class="relative bg-white/95 dark:bg-slate-900/95 backdrop-blur-3xl rounded-[32px] p-2.5 border border-white dark:border-slate-800 shadow-2xl shadow-primary/10"
+                class="relative bg-white/95 dark:bg-slate-900/95 backdrop-blur-3xl rounded-md p-2.5 border border-accent/40 dark:border-accent/40 shadow-2xl shadow-primary/10"
               >
                 <div
                   class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-1"
                 >
                   <!-- Looking For -->
                   <div
-                    class="lg:col-span-3 p-4 flex flex-col justify-center items-start border-b md:border-b-0 md:border-r border-slate-100 dark:border-slate-800"
+                    class="lg:col-span-2 px-1 py-4 flex flex-col justify-center items-start border-b md:border-b-0 md:border-r border-slate-100 dark:border-slate-800"
                   >
                     <label
                       class="text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-2.5 px-1"
                       >Looking for</label
                     >
                     <div
-                      class="flex bg-slate-100/50 dark:bg-slate-800/50 p-1.5 rounded-2xl w-full"
+                      class="flex bg-slate-100/50 dark:bg-slate-800/50 p-1.5 rounded-md w-full"
                     >
                       <button
                         @click="lookingFor = 'bride'"
                         :class="[
-                          'flex-1 flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl text-xs font-black transition-all duration-300',
+                          'flex-1 flex items-center justify-center gap-1 py-2.5 px-1 rounded-md text-xs font-black transition-all duration-300',
                           lookingFor === 'bride'
                             ? 'bg-white dark:bg-slate-700 text-primary shadow-xl ring-1 ring-slate-100 dark:ring-slate-600'
                             : 'text-slate-400 hover:text-slate-600',
@@ -178,7 +178,7 @@ const successStories = [
                       <button
                         @click="lookingFor = 'groom'"
                         :class="[
-                          'flex-1 flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl text-xs font-black transition-all duration-300',
+                          'flex-1 flex items-center justify-center gap-1 py-2.5 px-1 rounded-md text-xs font-black transition-all duration-300',
                           lookingFor === 'groom'
                             ? 'bg-white dark:bg-slate-700 text-secondary shadow-xl ring-1 ring-slate-100 dark:ring-slate-600'
                             : 'text-slate-400 hover:text-slate-600',
@@ -209,7 +209,7 @@ const successStories = [
                             v-for="n in 43"
                             :key="n"
                             :value="String(n + 17)"
-                            >{{ n + 17 }} Years</SelectItem
+                            >{{ n + 17 }}</SelectItem
                           >
                         </SelectContent>
                       </Select>
@@ -225,7 +225,7 @@ const successStories = [
                             v-for="n in 43"
                             :key="n"
                             :value="String(n + 17)"
-                            >{{ n + 17 }} Years</SelectItem
+                            >{{ n + 17 }}</SelectItem
                           >
                         </SelectContent>
                       </Select>
@@ -257,7 +257,7 @@ const successStories = [
 
                   <!-- Caste -->
                   <div
-                    class="lg:col-span-1.5 p-4 flex flex-col justify-center border-b md:border-b-0 md:border-r border-slate-100 dark:border-slate-800"
+                    class="lg:col-span-2 p-4 flex flex-col justify-center border-b md:border-b-0 md:border-r border-slate-100 dark:border-slate-800"
                   >
                     <label
                       class="text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-1.5 px-1"
@@ -282,7 +282,7 @@ const successStories = [
 
                   <!-- Marital Status -->
                   <div
-                    class="lg:col-span-1.5 p-4 flex flex-col justify-center border-b md:border-b-0 md:border-r border-slate-100 dark:border-slate-800"
+                    class="lg:col-span-2 p-4 flex flex-col justify-center border-b md:border-b-0 md:border-r border-slate-100 dark:border-slate-800"
                   >
                     <label
                       class="text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-1.5 px-1"
@@ -295,7 +295,9 @@ const successStories = [
                         <SelectValue placeholder="Status" />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="never-married">Single</SelectItem>
+                        <SelectItem value="never-married"
+                          >Never Married</SelectItem
+                        >
                         <SelectItem value="divorced">Divorced</SelectItem>
                         <SelectItem value="widowed">Widowed</SelectItem>
                       </SelectContent>
@@ -303,12 +305,12 @@ const successStories = [
                   </div>
 
                   <!-- Search Button -->
-                  <div class="lg:col-span-2 p-2 flex items-center">
+                  <div class="lg:col-span-2 px-2 py-6 flex items-end">
                     <NuxtLink to="/search" class="w-full">
                       <Button
-                        class="w-full h-16 rounded-[24px] bg-primary hover:bg-primary/90 text-white font-black text-lg shadow-2xl shadow-primary/30 transition-all hover:scale-[1.02] active:scale-[0.98]"
+                        class="w-full h-10 rounded-md bg-primary hover:bg-primary/90 text-white font-black text-lg shadow-2xl shadow-primary/30 transition-all hover:scale-[1.02] active:scale-[0.98]"
                       >
-                        <Search class="size-6 mr-2" />
+                        <Search class="size-6 mr-1" />
                         Search
                       </Button>
                     </NuxtLink>
