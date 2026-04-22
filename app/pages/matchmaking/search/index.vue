@@ -250,9 +250,11 @@ const resetFilters = () => {
           </div>
 
           <div class="pt-2 flex gap-2">
-            <Button variant="outline" class="flex-1 h-10 text-xs font-bold rounded-xl border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800">
-              View Profile
-            </Button>
+            <NuxtLink :to="`/matchmaking/profile/${profile.id}`" class="flex-1">
+              <Button variant="outline" class="w-full h-10 text-xs font-bold rounded-xl border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-primary hover:border-primary/30 transition-colors">
+                View Profile
+              </Button>
+            </NuxtLink>
             <Button class="flex-1 h-10 text-xs font-bold rounded-xl bg-primary hover:bg-primary/90 shadow-md shadow-primary/10">
               <Send class="size-3.5 mr-1.5" />
               Connect
