@@ -12,6 +12,8 @@ import {
   Send,
   Loader2,
   ChevronDown,
+  Crown,
+  BookOpen
 } from "lucide-vue-next";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -36,18 +38,18 @@ const selectedReligion = ref("all");
 
 // Profiles Data
 const allProfiles = [
-  { id: 1, name: "Fatema Begum", age: 24, city: "Dhaka", profession: "Software Engineer", religion: "Muslim", match: 95, image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Fatema" },
-  { id: 2, name: "Nasrin Akter", age: 27, city: "Chittagong", profession: "Doctor", religion: "Muslim", match: 88, image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Nasrin" },
-  { id: 3, name: "Sumaiya Islam", age: 22, city: "Sylhet", profession: "Student", religion: "Muslim", match: 91, image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Sumaiya" },
-  { id: 4, name: "Ruksana Khanam", age: 29, city: "Rajshahi", profession: "Teacher", religion: "Muslim", match: 82, image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Ruksana" },
-  { id: 5, name: "Maliha Chowdhury", age: 25, city: "Dhaka", profession: "Architect", religion: "Muslim", match: 87, image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Maliha" },
-  { id: 6, name: "Jannatul Ferdous", age: 23, city: "Comilla", profession: "Graphic Designer", religion: "Muslim", match: 84, image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Jannatul" },
-  { id: 7, name: "Ayesha Siddiqua", age: 26, city: "Dhaka", profession: "Doctor", religion: "Muslim", match: 93, image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Ayesha" },
-  { id: 8, name: "Sabina Yasmin", age: 28, city: "Khulna", profession: "Business", religion: "Muslim", match: 85, image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Sabina" },
-  { id: 9, name: "Tania Sultana", age: 24, city: "Dhaka", profession: "Engineer", religion: "Muslim", match: 89, image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Tania" },
-  { id: 10, name: "Liza Akter", age: 21, city: "Sylhet", profession: "Student", religion: "Muslim", match: 90, image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Liza" },
-  { id: 11, name: "Priya Das", age: 25, city: "Chittagong", profession: "Banker", religion: "Hindu", match: 86, image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Priya" },
-  { id: 12, name: "Meherun Nesa", age: 30, city: "Dhaka", profession: "Teacher", religion: "Muslim", match: 80, image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Meherun" },
+  { id: 1, name: "Fatema Begum", age: 24, city: "Dhaka", profession: "Software Engineer", religion: "Muslim", match: 95, image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Fatema", userType: "platinum", degree: "B.Sc in CSE" },
+  { id: 2, name: "Nasrin Akter", age: 27, city: "Chittagong", profession: "Doctor", religion: "Muslim", match: 88, image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Nasrin", userType: "gold", degree: "MBBS, FCPS" },
+  { id: 3, name: "Sumaiya Islam", age: 22, city: "Sylhet", profession: "Student", religion: "Muslim", match: 91, image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Sumaiya", userType: "free", degree: "BBA (Ongoing)" },
+  { id: 4, name: "Ruksana Khanam", age: 29, city: "Rajshahi", profession: "Teacher", religion: "Muslim", match: 82, image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Ruksana", userType: "free", degree: "M.A in English" },
+  { id: 5, name: "Maliha Chowdhury", age: 25, city: "Dhaka", profession: "Architect", religion: "Muslim", match: 87, image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Maliha", userType: "gold", degree: "B.Arch" },
+  { id: 6, name: "Jannatul Ferdous", age: 23, city: "Comilla", profession: "Graphic Designer", religion: "Muslim", match: 84, image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Jannatul", userType: "free", degree: "B.F.A" },
+  { id: 7, name: "Ayesha Siddiqua", age: 26, city: "Dhaka", profession: "Doctor", religion: "Muslim", match: 93, image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Ayesha", userType: "platinum", degree: "MBBS" },
+  { id: 8, name: "Sabina Yasmin", age: 28, city: "Khulna", profession: "Business", religion: "Muslim", match: 85, image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Sabina", userType: "gold", degree: "MBA" },
+  { id: 9, name: "Tania Sultana", age: 24, city: "Dhaka", profession: "Engineer", religion: "Muslim", match: 89, image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Tania", userType: "free", degree: "B.Sc in EEE" },
+  { id: 10, name: "Liza Akter", age: 21, city: "Sylhet", profession: "Student", religion: "Muslim", match: 90, image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Liza", userType: "free", degree: "B.Sc in Economics" },
+  { id: 11, name: "Priya Das", age: 25, city: "Chittagong", profession: "Banker", religion: "Hindu", match: 86, image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Priya", userType: "gold", degree: "BBA, MBA" },
+  { id: 12, name: "Meherun Nesa", age: 30, city: "Dhaka", profession: "Teacher", religion: "Muslim", match: 80, image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Meherun", userType: "free", degree: "M.Sc in Physics" },
 ];
 
 // Reactive Filtering Logic
@@ -211,6 +213,19 @@ const resetFilters = () => {
             :alt="profile.name"
             class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
           />
+          <!-- User Type Badge -->
+          <div class="absolute top-3 left-3">
+            <div
+              v-if="profile.userType !== 'free'"
+              :class="[
+                'backdrop-blur-sm px-2.5 py-1.5 rounded-xl flex items-center gap-1.5 shadow-lg border border-white/20',
+                profile.userType === 'platinum' ? 'bg-gradient-to-r from-slate-900/90 to-slate-800/90 text-white' : 'bg-gradient-to-r from-amber-400/90 to-orange-500/90 text-white'
+              ]"
+            >
+              <Crown class="size-3.5" :class="profile.userType === 'platinum' ? 'text-accent fill-accent' : 'text-white fill-white'" />
+              <span class="text-[10px] font-black uppercase tracking-tighter">{{ profile.userType }}</span>
+            </div>
+          </div>
           <!-- Match Badge -->
           <div class="absolute top-3 right-3 translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
             <div class="bg-white/90 dark:bg-slate-900/90 backdrop-blur-sm px-2.5 py-1.5 rounded-xl flex items-center gap-1.5 shadow-lg border border-white/20">
@@ -246,6 +261,10 @@ const resetFilters = () => {
             <div class="flex items-center gap-1.5 px-2 py-1 rounded-lg bg-slate-50 dark:bg-slate-800 text-[10px] font-bold text-slate-600 dark:text-slate-300">
               <GraduationCap class="size-3 text-accent" />
               {{ profile.religion }}
+            </div>
+            <div v-if="profile.degree" class="flex items-center gap-1.5 px-2 py-1 rounded-lg bg-slate-50 dark:bg-slate-800 text-[10px] font-bold text-slate-600 dark:text-slate-300">
+              <BookOpen class="size-3 text-primary" />
+              {{ profile.degree }}
             </div>
           </div>
 
