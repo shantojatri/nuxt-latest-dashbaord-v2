@@ -1,6 +1,7 @@
 <!-- app/components/layout/AppNavbar.vue -->
 <script setup lang="ts">
-import { Search, PanelLeftClose, PanelLeftOpen, Menu } from "lucide-vue-next";
+import { Search, PanelLeftClose, PanelLeftOpen, Menu, ChevronRight, Crown } from "lucide-vue-next";
+import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
 import AppLogo from "../shared/AppLogo.vue";
@@ -8,8 +9,22 @@ import LanguageSwitcher from "../shared/LanguageSwitcher.vue";
 import ThemeToggle from "../shared/ThemeToggle.vue";
 import NotificationBell from "../shared/NotificationBell.vue";
 import UserMenu from "../shared/UserMenu.vue";
+import { computed } from "vue";
+import { useRoute } from "vue-router";
 
 const { isCollapsed, collapse, toggleMobile } = useSidebar();
+const route = useRoute();
+
+const breadcrumbs = computed(() => {
+  const pathParts = route.path.split('/').filter(p => p);
+  return pathParts.map((part, index) => {
+    return {
+      name: part.replace(/-/g, ' '),
+      path: '/' + pathParts.slice(0, index + 1).join('/'),
+      isLast: index === pathParts.length - 1
+    };
+  });
+});
 </script>
 
 <template>
@@ -40,6 +55,21 @@ const { isCollapsed, collapse, toggleMobile } = useSidebar();
         <PanelLeftClose v-if="!isCollapsed" class="size-[18px]" />
         <PanelLeftOpen v-else class="size-[18px]" />
       </button>
+
+      <!-- Breadcrumbs -->
+      <Separator orientation="vertical" class="hidden md:block h-6 mx-2" />
+      <nav class="hidden md:flex items-center gap-1.5 text-sm font-medium text-slate-500">
+        <template v-for="(crumb, index) in breadcrumbs" :key="crumb.path">
+          <ChevronRight v-if="index > 0" class="size-4" />
+          <NuxtLink 
+            :to="crumb.path"
+            class="capitalize transition-colors"
+            :class="crumb.isLast ? 'text-slate-900 dark:text-white font-semibold' : 'hover:text-slate-900 dark:hover:text-white'"
+          >
+            {{ crumb.name }}
+          </NuxtLink>
+        </template>
+      </nav>
     </div>
 
     <!-- CENTER -->
@@ -56,6 +86,17 @@ const { isCollapsed, collapse, toggleMobile } = useSidebar();
     <!-- RIGHT (Hidden on small mobile, items moved to sidebar) -->
     <div class="flex items-center gap-1">
       <div class="hidden sm:flex items-center gap-1">
+        <!-- Relevant to Dashboard (Premium/Credits) -->
+        <div class="hidden xl:flex items-center bg-slate-100 dark:bg-slate-800 rounded-lg p-1 border border-slate-200 dark:border-slate-700 mr-2">
+          <div class="px-3 py-1 flex items-center gap-1.5 border-r border-slate-200 dark:border-slate-700">
+            <div class="size-2 rounded-full bg-primary animate-pulse"></div>
+            <span class="text-xs font-bold text-slate-700 dark:text-slate-300">150 Credits</span>
+          </div>
+          <Button variant="ghost" size="sm" class="h-6 px-2 ml-1 text-xs font-bold text-primary hover:bg-primary/10 hover:text-primary transition-colors">
+            <Crown class="size-3 mr-1" /> Upgrade
+          </Button>
+        </div>
+
         <LanguageSwitcher />
         <ThemeToggle />
         <NotificationBell />
