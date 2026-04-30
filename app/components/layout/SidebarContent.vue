@@ -16,6 +16,7 @@ import {
   ChevronDown,
   Sparkles,
   LogOut,
+  Flame,
 } from "lucide-vue-next";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
@@ -63,6 +64,7 @@ const navSections: NavSection[] = [
         icon: LayoutDashboard,
         href: "/matchmaking/dashboard",
       },
+      { label: "Today's Match", icon: Flame, href: "/matchmaking/todays-match" },
       { label: "Search", icon: Search, href: "/matchmaking/search" },
       { label: "Profile", icon: User, href: "/matchmaking/profile" },
       {
