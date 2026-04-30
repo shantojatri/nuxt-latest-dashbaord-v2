@@ -340,9 +340,11 @@ const preferenceInfo = [
 
     <!-- Main Content Tabs -->
     <Tabs defaultValue="about" class="w-full">
-      <div class="relative">
+      <div
+        class="relative overflow-x-auto pb-2 -mx-4 px-4 md:mx-0 md:px-0 scrollbar-none"
+      >
         <TabsList
-          class="flex justify-start h-auto w-full md:w-auto bg-slate-100/50 dark:bg-slate-900/50 p-1 rounded-xl border border-slate-100 dark:border-slate-800 overflow-x-auto flex-nowrap [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] items-center gap-1"
+          class="inline-flex justify-start h-auto w-full md:w-auto bg-slate-100/50 dark:bg-slate-900/50 p-1 rounded-xl border border-slate-100 dark:border-slate-800 overflow-x-auto flex-nowrap [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] items-center gap-1"
         >
           <TabsTrigger
             value="about"
